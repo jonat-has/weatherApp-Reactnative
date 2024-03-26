@@ -26,7 +26,8 @@ const initialState: weather = {
     min: 0,
     rain: 0,
     wind_speedy: '',
-    description: ''
+    description: '',
+    condition: 'clear_day'
   }]
 };
 
@@ -52,13 +53,20 @@ interface Forecast {
   rain: number
   wind_speedy: string
   description: string
+  condition: string
 }
 export default function Home() {
     
     const [dataWeather, setWeatherData] = useState<weather>(initialState);
+    const [ cityName, setCityName] = useState<string>('Jaboatao_dos_Guararapes,PE')
 
     useEffect(() => {
-      weatherApi.get('')
+
+      const params = {
+        city_name: cityName
+      };
+
+      weatherApi.get('', { params })
         .then((response) => {
           console.log('Resposta da API:', response.data);
           setWeatherData(response.data);
@@ -66,7 +74,13 @@ export default function Home() {
         .catch((error) => {
           console.error('Erro ao buscar dados:', error);
         });
-    }, []);
+    }, [cityName]);
+
+    const handleSearch = ( name: string ) => {
+      const formattedCityName = name.trim().replace(/\s+/g, '_')
+      setCityName(formattedCityName)
+      console.log(formattedCityName)
+    }
 
 
   return (
@@ -74,8 +88,8 @@ export default function Home() {
       colors={['#082655', '#124cb4', '#0c43ac']}
       className="w-full h-[980px] p-8"
     >
-      <Header cidade={dataWeather.city_name}/>
-     <WheatherNow temp={dataWeather.temp} descricao={dataWeather.description} max={dataWeather?.forecast[0].max} min={dataWeather.forecast[0].min} />
+      <Header cidade={dataWeather.city_name} pesquisar={handleSearch}/>
+     <WheatherNow imgName={dataWeather.condition_slug} temp={dataWeather.temp} descricao={dataWeather.description} max={dataWeather?.forecast[0].max} min={dataWeather.forecast[0].min} />
       <InfoLine chuva={dataWeather.rain} umidade={dataWeather.humidity} vento={dataWeather.wind_speedy}/>
       <TodayForecast />
       <NextForecast forecast={dataWeather.forecast}/>

@@ -5,13 +5,23 @@ import DownArrow from "../assets/header/downArrow.svg"
 import Bell from "../assets/header/bell.svg"
 import { useState } from 'react';
 
+interface header {
+    cidade: string,
+    pesquisar: (text: string) => void;
+}
 
-export default function Header({cidade}: {cidade: string}) {
-    const [input, setInput] = useState(true)
+
+export default function Header({ cidade, pesquisar }: header) {
+    const [input, setInput] = useState<boolean>(true)
+    const [ nomeCidade, setNomeCidade ] = useState<string>('')
 
     const handleInput = () => {
         setInput(!input)
     }
+
+    const handleChangeText = (text: string) => {
+        setNomeCidade(text);
+      };
 
     return (
         <View>
@@ -32,8 +42,10 @@ export default function Header({cidade}: {cidade: string}) {
        className='w-64 h-9 p-2 bg-white text-black rounded-md absolute mt-[40px]'
        placeholder="Digite o nome da cidade"
        autoCapitalize="none"
+       value={nomeCidade}
+       onChangeText={handleChangeText}
       />
-      <TouchableOpacity className='bg-cyan-500/[.4] w-[72px] h-9 rounded-md justify-center items-center absolute mt-[40px] ml-[260px]'><Text className='text-white'>Pesquisar</Text></TouchableOpacity>
+      <TouchableOpacity onPress={() => pesquisar(nomeCidade)} className='bg-cyan-500/[.4] w-[72px] h-9 rounded-md justify-center items-center absolute mt-[40px] ml-[260px]'><Text className='text-white'>Pesquisar</Text></TouchableOpacity>
       </>}
         </View>
     )
