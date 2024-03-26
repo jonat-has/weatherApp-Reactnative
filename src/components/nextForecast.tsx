@@ -2,31 +2,32 @@ import { Text, View } from "react-native";
 import Calendar from "../assets/nextForecast/calendar.svg";
 import Day from "../assets/nextForecast/day.svg";
 
-export default function NextForecast() {
-    const forecastData = [
-        {key: 'Monday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Tuesday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Wednesday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Thursday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Friday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Saturday', weather: <Day/>, max: "28º", min: "10º"},
-        {key: 'Sunday', weather: <Day/>, max: "28º", min: "10º"}
-    ];
+interface Forecast {
+    date: string
+    weekday: string
+    max: number
+    min: number
+    rain: number
+    wind_speedy: string
+    description: string
+  }
+
+export default function NextForecast( { forecast }: { forecast: Forecast[] } ) {
 
     return (
         <View className="px-4 py-3 top-8 rounded-3xl bg-cyan-500/[.3]" >
-            <View className="flex-row justify-between">
-                <Text className="text-white text-xl font-semibold">Next Forecast</Text>
+            <View className="flex-row justify-between pb-2">
+                <Text className="text-white text-xl font-semibold">Previsão Da Semana </Text>
                 <Calendar/>
             </View>
             <View>
-                {forecastData.map((item, index) => (
+                {forecast.map((item, index) => (
                     <View key={index} className="flex-row justify-between items-center py-1"> 
                         <View className="w-20">
-                            <Text className="text-white font-medium">{item.key}</Text>
+                            <Text className="text-white font-medium">{item.weekday}, {item.date}</Text>
                         </View>
                         <View className="">
-                            {item.weather}
+                            <Day/>
                         </View>
                         <View className="flex-row justify-between w-14">
                             <Text className="text-white font-normal">{item.max}</Text>

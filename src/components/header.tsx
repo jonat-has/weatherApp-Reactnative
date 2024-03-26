@@ -5,11 +5,10 @@ import DownArrow from "../assets/header/downArrow.svg"
 import Bell from "../assets/header/bell.svg"
 import { useState } from 'react';
 
-export default function Header( {data}: any ) {
+
+export default function Header({cidade}: {cidade: string}) {
     const [input, setInput] = useState(true)
 
-
-    const cityName = data.city_name
     const handleInput = () => {
         setInput(!input)
     }
@@ -17,9 +16,9 @@ export default function Header( {data}: any ) {
     return (
         <View>
         <View className='flex-row justify-between p-2'>
-            <TouchableOpacity className='flex-row justify-evenly w-24 items-center' onPress={handleInput}>
+            <TouchableOpacity className='flex-row justify-evenly w-auto items-center' onPress={handleInput}>
               <PinSVG/>
-              <Text className="text-white">{cityName}</Text>
+              <Text className="text-white px-1">{cidade}</Text>
               <DownArrow/>
             </TouchableOpacity>
             <View>
