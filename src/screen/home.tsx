@@ -59,6 +59,8 @@ export default function Home() {
     
     const [dataWeather, setWeatherData] = useState<weather>(initialState);
     const [ cityName, setCityName] = useState<string>('Jaboatao_dos_Guararapes,PE')
+    const dia = ['#2daedd','#31b6e1','#2ec5e8']
+    const noite = ['#082655', '#124cb4', '#0c43ac']
 
     useEffect(() => {
 
@@ -82,10 +84,18 @@ export default function Home() {
       console.log(formattedCityName)
     }
 
+    let gradientColors = dia;
+    if (dataWeather.currently === 'dia') {
+        gradientColors = dia; // Defina suas cores para o dia aqui
+    } else if (dataWeather.currently === 'noite') {
+        gradientColors = noite; // Defina suas cores para a noite aqui
+    }
+
+    
 
   return (
     <LinearGradient
-      colors={['#082655', '#124cb4', '#0c43ac']}
+      colors={gradientColors}
       className="w-full h-[980px] p-8"
     >
       <Header cidade={dataWeather.city_name} pesquisar={handleSearch}/>
