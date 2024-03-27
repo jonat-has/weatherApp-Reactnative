@@ -59,8 +59,14 @@ export default function Home() {
     
     const [dataWeather, setWeatherData] = useState<weather>(initialState);
     const [ cityName, setCityName] = useState<string>('Jaboatao_dos_Guararapes,PE')
-    const dia = ['#2daedd','#31b6e1','#2ec5e8']
-    const noite = ['#082655', '#124cb4', '#0c43ac']
+    const dia = {
+      gradient: ['#2daedd','#31b6e1','#2ec5e8'],
+      bg_components: "bg-cyan-700/[.3]"
+    }
+    const noite = {
+      gradient: ['#082655', '#124cb4', '#0c43ac'],
+      bg_components: "bg-cyan-500/[.3]"
+    }
 
     useEffect(() => {
 
@@ -84,25 +90,26 @@ export default function Home() {
       console.log(formattedCityName)
     }
 
-    let gradientColors = dia;
+    let themeColor = dia;
+    
     if (dataWeather.currently === 'dia') {
-        gradientColors = dia; // Defina suas cores para o dia aqui
+      themeColor = dia; 
     } else if (dataWeather.currently === 'noite') {
-        gradientColors = noite; // Defina suas cores para a noite aqui
+      themeColor = noite;
     }
 
     
 
   return (
     <LinearGradient
-      colors={gradientColors}
+      colors={themeColor.gradient}
       className="w-full h-[980px] p-8"
     >
       <Header cidade={dataWeather.city_name} pesquisar={handleSearch}/>
      <WheatherNow imgName={dataWeather.condition_slug} temp={dataWeather.temp} descricao={dataWeather.description} max={dataWeather?.forecast[0].max} min={dataWeather.forecast[0].min} />
-      <InfoLine chuva={dataWeather.rain} umidade={dataWeather.humidity} vento={dataWeather.wind_speedy}/>
-      <TodayForecast />
-      <NextForecast forecast={dataWeather.forecast}/>
+      <InfoLine tema={themeColor.bg_components} chuva={dataWeather.rain} umidade={dataWeather.humidity} vento={dataWeather.wind_speedy}/>
+      <TodayForecast tema={themeColor.bg_components}/>
+      <NextForecast tema={themeColor.bg_components} forecast={dataWeather.forecast}/>
     </LinearGradient>
   );
 }

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import Day from "../assets/nextForecast/day.svg"
 
-export default function TodayForecast() {
+export default function TodayForecast({ tema }: { tema: string }) {
     const forecastData = [
         {key: '15:00', weather: <Day/>, temp: "28º"},
         {key: '18:00', weather: <Day/>, temp: "28º"},
@@ -10,7 +10,7 @@ export default function TodayForecast() {
     ];
 
     return (
-        <View className="px-4 py-3 top-6 rounded-3xl bg-cyan-500/[.3]" >
+        <View className={`px-4 py-3 top-6 rounded-3xl ${tema}`} >
             <View className="flex-row justify-between">
                 <Text className="text-white text-xl font-semibold">Hoje</Text>
                 <Text className="text-white text-lg">Mar, 9</Text>

@@ -23,7 +23,7 @@ interface Forecast {
     condition: string
 }
 
-export default function NextForecast({ forecast }: { forecast: Forecast[] }) {
+export default function NextForecast({ forecast,tema }: { forecast: Forecast[], tema: string }) {
 
     const defaultWidth = 28;
     const defaultHeight = 28;
@@ -56,7 +56,7 @@ export default function NextForecast({ forecast }: { forecast: Forecast[] }) {
     }
 
     return (
-        <View className="px-4 py-3 top-8 rounded-3xl bg-cyan-500/[.3]" >
+        <View className={`px-4 py-3 top-8 rounded-3xl ${tema}`} >
             <View className="flex-row justify-between pb-2">
                 <Text className="text-white text-xl font-semibold">Previsão Da Semana </Text>
                 <Calendar />

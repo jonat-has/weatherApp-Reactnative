@@ -7,11 +7,13 @@ interface infoLine {
     chuva: number,
     umidade: number,
     vento: string
+    tema: string
 }
 
-export default function InfoLine({ chuva, umidade, vento }: infoLine) {
+
+export default function InfoLine({ chuva, umidade, vento, tema }: infoLine) {
     return (
-        <View className="flex-row top-4 justify-around p-2 rounded-3xl bg-cyan-500/[.3]">
+        <View className={`flex-row top-4 justify-around p-2 rounded-3xl ${tema}`}>
             <View className="flex-row items-center">
                 <Grain/>
                 <Text className="text-white"> {chuva}%</Text>
