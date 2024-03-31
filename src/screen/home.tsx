@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <LinearGradient
       colors={themeColor.gradient}
-      className="w-full h-[980px] p-8"
+      className="w-full h-[1016px] p-8"
     >
       <Header cidade={dataWeather.city_name} pesquisar={handleSearch}/>
      <WheatherNow imgName={dataWeather.condition_slug} temp={dataWeather.temp} descricao={dataWeather.description} max={dataWeather?.forecast[0].max} min={dataWeather.forecast[0].min} />

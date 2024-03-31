@@ -63,7 +63,7 @@ export default function WeatherNow({ temp, descricao, max, min, imgName }: weath
     }
 
     return (
-        <View className="items-center w-full h-auto">
+        <View className="items-center w-full h-auto mt-8">
             {SvgComponent}
             <View className="items-center">
                 <Text className="text-white font-bold text-6xl">{temp}º</Text>
